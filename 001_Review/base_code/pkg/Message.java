@@ -3,15 +3,24 @@ import java.util.*;
 import java.io.*;
 
 public class Message {
-
+	private String auth;
+	private String subj;
+	private String bod;
+	private int i;
 	// Default Constructor
 	public Message() {
-		
+		auth = "";
+		subj = "";
+		bod = "";
+		i = 0;
 	}
 	
 	// Parameterized Constructor
 	public Message(String auth, String subj, String bod, int i) {
-		
+		this.auth  = auth;
+		this.subj = subj;
+		this.bod = bod;
+		this.i = i;
 	}
 
 	// This function is responsbile for printing the Message
@@ -24,7 +33,8 @@ public class Message {
 	// Note: Each indentation increment represents 2 spaces. e.g. if indentation ==  1, the reply should be indented 2 spaces, 
 	// if it's 2, indent by 4 spaces, etc. 
 	public void print(int indentation){
-
+		System.out.println("Message #" + (indentation++));
+		System.out.println()
 	}
 
 	// Default function for inheritance

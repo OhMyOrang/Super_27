@@ -3,27 +3,33 @@ import java.util.*;
 import java.io.*;
 
 public class User {
-
+	private String usr;
+	private int pwd;
 	// Creates a User with empty name and password.
 	public User() {
-
+		usr = "";
+		pwd = -1;
 	}
 
 	// Creates a User with given username and password.
 	public User(String usr, String pwd) {
-
+		this.usr = usr;
+		this.pwd = pwd;
 	}
 
 	// Returns the username
 	public String getUsername(){
-
+		return usr;
 	}
 
 	// Returns true if the stored username/password matches the parameters. Otherwise returns false.
 	// Note that, even with a User with empty name and password, this is actually a valid User object (it is the default User), 
 	// This function must still return false if given an empty username string.  
 	public boolean check(String usr, String psd){
-
+		if(this.usr.equals(usr) && pwd.equals(psd)){
+			return true;
+		}
+		return false;
 	}
 
 	// Sets a new password.
@@ -31,6 +37,6 @@ public class User {
 	// Also, a default User cannot have its password changed. 
 	// Return true if password changed, return false if not.
 	public boolean setPassword(String oldPass, String newPass){
-
+		
 	}
 }
