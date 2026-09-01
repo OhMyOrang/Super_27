@@ -112,6 +112,7 @@ public class BBoard {		// This is your main file that connects all classes.
 	// Any password is allowed except 'c' or 'C' for allowing the user to quit out to the menu. 
 	// Once entered, the user will be told "Password Accepted." and returned to the menu.
 	private void setPassword(){
+		System.out.println("Old Password (c or C for Menu): ");
 		
 	}
 

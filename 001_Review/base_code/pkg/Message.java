@@ -6,13 +6,15 @@ public class Message {
 	private String auth;
 	private String subj;
 	private String bod;
-	private int i;
+	static int i;
+	private ArrayList<Message> childList;
 	// Default Constructor
 	public Message() {
 		auth = "";
 		subj = "";
 		bod = "";
 		i = 0;
+		childList = ArrayList<Message>();
 	}
 	
 	// Parameterized Constructor
@@ -33,8 +35,9 @@ public class Message {
 	// Note: Each indentation increment represents 2 spaces. e.g. if indentation ==  1, the reply should be indented 2 spaces, 
 	// if it's 2, indent by 4 spaces, etc. 
 	public void print(int indentation){
-		System.out.println("Message #" + (indentation++));
-		System.out.println()
+		System.out.println("Message #" + (i) + ": ");
+		if()
+		System.out.println("From " + auth + ": " + )
 	}
 
 	// Default function for inheritance
@@ -44,17 +47,17 @@ public class Message {
 
 	// Returns the subject String
 	public String getSubject(){
-		
+		return subj;
 	} 
 
 	// Returns the ID
 	public int getId(){
-		
+		return i;
 	}
 
 	// Adds a child pointer to the parent's childList.
 	public void addChild(Message child){
-		
+		childList.add(child);
 	}
 
 }
