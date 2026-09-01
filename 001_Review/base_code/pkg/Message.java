@@ -42,7 +42,7 @@ public class Message {
 
 	// Default function for inheritance
 	public boolean isReply(){
-		
+		return false;
 	}
 
 	// Returns the subject String
