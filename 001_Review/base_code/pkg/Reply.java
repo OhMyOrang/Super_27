@@ -6,13 +6,13 @@ public class Reply extends Message {
 	private String auth;
 	private String subj;
 	private String bod;
-	int i;
+	private int i;
 	// Default Constructor
 	public Reply() {
-		auth = "";
-		subj = "";
-		bod = "";
-		i = 0;
+		this.auth = "";
+		this.subj = "";
+		this.bod = "";
+		this.i = 0;
 	}
 
 	// Parameterized Constructor

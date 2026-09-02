@@ -9,10 +9,10 @@ public class Topic extends Message {
 	private int i;
 	// Default Constructor
 	public Topic() {
-		auth = "";
-		subj = "";
-		bod = "";
-		i = 0;
+		this.auth = "";
+		this.subj = "";
+		this.bod = "";
+		this.i = 0;
 	}
 
 	// Parameterized constructor

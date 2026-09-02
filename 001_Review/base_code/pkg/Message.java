@@ -40,7 +40,7 @@ public class Message {
 			indentation++;
 		}
 		System.out.println("Message #" + (j) + ": ");
-		System.out.println("From " + auth + ": " + auth);
+		System.out.println("From " + childList.get(indentation).auth + ": ");
 		if(childList.get(indentation).isReply() == false){
 			print(0);
 		}
