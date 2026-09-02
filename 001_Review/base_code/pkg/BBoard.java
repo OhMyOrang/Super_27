@@ -4,15 +4,24 @@ import java.io.*;
 
 public class BBoard {		// This is your main file that connects all classes.
 	// Think about what your global variables need to be.
+	private String ttl;
+	private String usr;
+	private ArrayList<Message> msgList;
 
 	// Default constructor that creates a board with a defaulttitle, empty user and message lists,
 	// and no current user
 	public BBoard() {
-		
+		ttl = "";
+		usr = "";
+		msgList = new ArrayList<Message>();
+		usrList = new ArrayList<User>();
 	}
 
 	// Same as the default constructor except it sets the title of the board
 	public BBoard(String ttl) {	
+		this.ttl = ttl;
+		usr = "";
+		msgList = new ArrayList<Message>();
 	}
 
 	// Gets a filename of a file that stores the user info in a given format (users.txt)

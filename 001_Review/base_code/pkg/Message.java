@@ -6,7 +6,7 @@ public class Message {
 	private String auth;
 	private String subj;
 	private String bod;
-	static int i;
+	private int i;
 	private ArrayList<Message> childList;
 	// Default Constructor
 	public Message() {
@@ -14,7 +14,7 @@ public class Message {
 		subj = "";
 		bod = "";
 		i = 0;
-		childList = ArrayList<Message>();
+		childList = new ArrayList<Message>();
 	}
 	
 	// Parameterized Constructor
@@ -35,9 +35,16 @@ public class Message {
 	// Note: Each indentation increment represents 2 spaces. e.g. if indentation ==  1, the reply should be indented 2 spaces, 
 	// if it's 2, indent by 4 spaces, etc. 
 	public void print(int indentation){
-		System.out.println("Message #" + (i) + ": ");
-		if()
-		System.out.println("From " + auth + ": " + )
+		for(int i = 0; i <= indentation*2; i+=2){
+			System.out.print(" ");
+			indentation++;
+		}
+		System.out.println("Message #" + (j) + ": ");
+		System.out.println("From " + auth + ": " + auth);
+		if(childList.get(indentation).isReply() == false){
+			print(0);
+		}
+		print(indentation);
 	}
 
 	// Default function for inheritance
