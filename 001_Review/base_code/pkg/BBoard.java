@@ -9,7 +9,6 @@ public class BBoard {		// This is your main file that connects all classes.
 	private ArrayList<Message> msgList;
 	private ArrayList<User> usrList;
 	private User currentUser;
-
 	// Default constructor that creates a board with a defaulttitle, empty user and message lists,
 	// and no current user
 	public BBoard() {
@@ -61,6 +60,7 @@ public class BBoard {		// This is your main file that connects all classes.
 			for(int j = 0; j < usrList.size(); j++){
 				if(usrList.get(j).check(logUse, pasUse)){
 					currentUser = usrList.get(j);
+					usr = currentUser.getUsername();
 					break;
 				}
 			}
@@ -85,6 +85,8 @@ public class BBoard {		// This is your main file that connects all classes.
 	// Q/q should reset the currentUser to 0 and then end return
 	// Note: if login() did not set a valid currentUser, function must immediately return without showing menu
 	public void run(){
+		System.out.print("holy moly guacamole guys its " + ttl + "12389weruiheraguhijn");
+		login();
 		Scanner sc = new Scanner(System.in);
 		if(currentUser == null){
 			return;
@@ -102,7 +104,7 @@ public class BBoard {		// This is your main file that connects all classes.
 				addReply();
 			}
 			else if(chosen.equals("p") || chosen.equals("P")){
-				setPassword();
+				currentUser.setPassword();
 			}
 			else if(chosen.equals("q") || chosen.equals("Q")){
 				currentUser = null;
@@ -119,11 +121,14 @@ public class BBoard {		// This is your main file that connects all classes.
 	// It will then be the responsibility of the Topic object to invoke the print function recursively on its own replies
 	// The BBoard display function will ignore all reply objects in its message list
 	private void display(){
+		System.out.println("\n-----------------------------------");
 		for(int i = 0; i < msgList.size(); i++){
 			if(msgList.get(i).isReply() == false){
 				msgList.get(i).print(0);
 			}
+			System.out.println("");
 		}
+		System.out.println("-----------------------------------");
 	}
 
 
@@ -142,7 +147,13 @@ public class BBoard {		// This is your main file that connects all classes.
 	// Once the Topic has been constructed, add it to the messageList
 	// This should invoke your inheritance of Topic to Message
 	private void addTopic(){
-
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Subject: ");
+		String subj = sc.nextLine();
+		System.out.println("Body: ");
+		String bod = sc.nextLine();
+		Message addedTopic = new Topic(currentUser.getUsername(), subj, bod, msgList.size() + 1);
+		msgList.add(addedTopic);
 	}
 
 	// This function asks the user to enter a reply to a given Message (which may be either a Topic or a Reply, so we can handle nested replies).
@@ -175,7 +186,26 @@ public class BBoard {		// This is your main file that connects all classes.
 	// Finally, push back the Message created to the BBoard's messageList. 
 	// Note: When the user chooses to return to the menu, do not call run() again - just return fro mthis addReply function. 
 	private void addReply(){
-
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Message ID (-1 for Menu): ");
+		int id = sc.nextInt();
+		if(id == -1){
+			return;
+		}
+		while(id > msgList.size() || id != -1){
+			System.out.println("ID invalid");
+			System.out.print("Message ID (-1 for Menu): ");
+			id = sc.nextInt();
+			if(id == -1){
+				return;
+			}
+		}
+		System.out.print("Body: ");
+		String bod = sc.nextLine();
+		String subj = "Re: " + msgList.get(id - 1).getSubject();
+		Message addedReply = new Reply(currentUser.getUsername(), subj, bod, msgList.size() + 1);
+		msgList.get(id - 1).addChild(addedReply);
+		msgList.add(addedReply);
 	}
 
 	// This function allows the user to change their current password.
@@ -186,8 +216,24 @@ public class BBoard {		// This is your main file that connects all classes.
 	// Any password is allowed except 'c' or 'C' for allowing the user to quit out to the menu. 
 	// Once entered, the user will be told "Password Accepted." and returned to the menu.
 	private void setPassword(){
-		System.out.println("Old Password (c or C for Menu): ");
-		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Old Pass (c for Menu): ");
+		String oldPass = sc.nextLine();
+		if(oldPass.equals("c") || oldPass.equals("C")){
+			return;
+		}
+		while(!currentUser.check(usr, oldPass)){
+			System.out.println("Invalid Pass");
+			System.out.print("Old Pass (c for Menu): ");
+			oldPass = sc.nextLine();
+			if(oldPass.equals("c") || oldPass.equals("C")){
+				return;
+			}
+		}
+		System.out.print("\nNew Pass: ");
+		String newPass = sc.nextLine();
+		currentUser.setPassword(oldPass, newPass);
+		System.out.println("Yippe new pass");
 	}
 
 }
