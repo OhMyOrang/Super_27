@@ -16,7 +16,7 @@ public class BBoard {		// This is your main file that connects all classes.
 		usr = "";
 		msgList = new ArrayList<Message>();
 		usrList = new ArrayList<User>();
-		currentUser = null;
+		currentUser = new User();
 	}
 
 	// Same as the default constructor except it sets the title of the board
@@ -24,7 +24,7 @@ public class BBoard {		// This is your main file that connects all classes.
 		this.ttl = ttl;
 		usr = "";
 		msgList = new ArrayList<Message>();
-		currentUser = null;
+		currentUser = new User();
 	}
 
 	// Gets a filename of a file that stores the user info in a given format (users.txt)
@@ -66,7 +66,7 @@ public class BBoard {		// This is your main file that connects all classes.
 					break;
 				}
 			}
-			if(currentUser == null){
+			if(currentUser.getUsername().equals("")){
 				System.out.println("Invalid Username or Password");
 			}
 			else{
@@ -91,10 +91,6 @@ public class BBoard {		// This is your main file that connects all classes.
 		System.out.print("holy moly guacamole guys its " + ttl + "12389weruiheraguhijn");
 		login();
 		Scanner sc = new Scanner(System.in);
-		if(currentUser == null){
-			sc.close();
-			return;
-		}
 		while(true){
 			System.out.println("Menu\n - Display Msgs(d)\n - Add New Topic(n)\n - Add Reply(r)\n - Change Password(p)\n - Quit(q)\nChoose: ");
 			String chosen = sc.nextLine();
