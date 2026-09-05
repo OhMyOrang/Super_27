@@ -37,7 +37,13 @@ public class BBoard {		// This is your main file that connects all classes.
 	// If not, it will keep asking until a match is found or the user types 'q' or 'Q' as username to quit
 	// When the users chooses to quit, sayu "Bye!" and return from the login function
 	public void login(){
-
+		Scanncer sc = new Scanner(System.in);
+		System.out.print("Enter username (Q or q to quit): ");
+		String loguse = sc.nextLine();
+		if(!loguse.equals("q") || !loguse.equals("Q")){
+			System.out.print("\nEnter password: ");
+			String pasuse = sc.nextLine();
+		}
 	}
 	
 	// Contains main loop of Bulletin Board

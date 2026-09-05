@@ -36,15 +36,14 @@ public class Message {
 	// if it's 2, indent by 4 spaces, etc. 
 	public void print(int indentation){
 		for(int i = 0; i <= indentation*2; i+=2){
-			System.out.print(" ");
+			System.out.print(" \n ");
 			indentation++;
 		}
-		System.out.println("Message #" + (j) + ": ");
-		System.out.println("From " + childList.get(indentation).auth + ": ");
-		if(childList.get(indentation).isReply() == false){
-			print(0);
+		System.out.println("Message #" + indentation + ": \"" + childList.get(indentation).bod + "\"");
+		for(int i = 0; i <= indentation*2; i+=2){
+			System.out.print(" \n ");
+			indentation++;
 		}
-		print(indentation);
 	}
 
 	// Default function for inheritance
