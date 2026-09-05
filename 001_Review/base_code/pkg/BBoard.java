@@ -7,6 +7,8 @@ public class BBoard {		// This is your main file that connects all classes.
 	private String ttl;
 	private String usr;
 	private ArrayList<Message> msgList;
+	private ArrayList<User> usrList;
+	private User currentUser;
 
 	// Default constructor that creates a board with a defaulttitle, empty user and message lists,
 	// and no current user
@@ -15,6 +17,7 @@ public class BBoard {		// This is your main file that connects all classes.
 		usr = "";
 		msgList = new ArrayList<Message>();
 		usrList = new ArrayList<User>();
+		currentUser = null;
 	}
 
 	// Same as the default constructor except it sets the title of the board
@@ -22,13 +25,20 @@ public class BBoard {		// This is your main file that connects all classes.
 		this.ttl = ttl;
 		usr = "";
 		msgList = new ArrayList<Message>();
+		currentUser = null;
 	}
 
 	// Gets a filename of a file that stores the user info in a given format (users.txt)
 	// Opens and reads the file of all authorized users and passwords
 	// Constructs a User object from each name/password pair, and populates the userList ArrayList.
 	public void loadUsers(String inputFile) throws FileNotFoundException {
-
+		File userFile = new File(inputFile);
+		Scanner sc = new Scanner(userFile);
+		while(sc.hasNextLine()){
+			String line = sc.nextLine();
+			String [] dataParts = line.split(" ");
+			usrList.add(new User(dataParts[0], dataParts[1]));
+		}
 	}
 
 	// Asks for and validates a user/password. 
@@ -37,15 +47,33 @@ public class BBoard {		// This is your main file that connects all classes.
 	// If not, it will keep asking until a match is found or the user types 'q' or 'Q' as username to quit
 	// When the users chooses to quit, sayu "Bye!" and return from the login function
 	public void login(){
-		Scanncer sc = new Scanner(System.in);
-		System.out.print("Enter username (Q or q to quit): ");
-		String loguse = sc.nextLine();
-		if(!loguse.equals("q") || !loguse.equals("Q")){
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Caps dont matter (im too lazy to write those as options, they work tho)");
+		while(true){
+			System.out.print("Enter username (Q to quit): ");
+			String logUse = sc.nextLine();
+			if(logUse.equals("q") || logUse.equals("Q")){
+				System.out.println("qouierjntwirewgoodbye");
+				return;
+			}
 			System.out.print("\nEnter password: ");
-			String pasuse = sc.nextLine();
+			String pasUse = sc.nextLine();
+			for(int j = 0; j < usrList.size(); j++){
+				if(usrList.get(j).check(logUse, pasUse)){
+					currentUser = usrList.get(j);
+					break;
+				}
+			}
+			if(currentUser == null){
+				System.out.println("Invalid Username or Password");
+			}
+			else{
+				System.out.println("Welcome back " + currentUser.getUsername() + "!!!!11!!wefwefuihwefyuiherdgrrtyshj");
+				break;
+			}
 		}
 	}
-	
+
 	// Contains main loop of Bulletin Board
 	// IF and ONLY IF there is a valid currentUser, enter main loop, displaying menu items
 	// --- Display Messages ('D' or 'd')
@@ -57,14 +85,45 @@ public class BBoard {		// This is your main file that connects all classes.
 	// Q/q should reset the currentUser to 0 and then end return
 	// Note: if login() did not set a valid currentUser, function must immediately return without showing menu
 	public void run(){
-
+		Scanner sc = new Scanner(System.in);
+		if(currentUser == null){
+			return;
+		}
+		while(true){
+			System.out.println("Menu\n - Display Msgs(d)\n - Add New Topic(n)\n - Add Reply(r)\n - Change Password(p)\n - Quit(q)\nChoose: ");
+			String chosen = sc.nextLine();
+			if(chosen.equals("d") || chosen.equals("D")){
+				display();
+			}
+			else if(chosen.equals("n") || chosen.equals("N")){
+				addTopic();
+			}
+			else if(chosen.equals("r") || chosen.equals("R")){
+				addReply();
+			}
+			else if(chosen.equals("p") || chosen.equals("P")){
+				setPassword();
+			}
+			else if(chosen.equals("q") || chosen.equals("Q")){
+				currentUser = null;
+				System.out.print("GET OUTTT");
+				return;
+			}
+			else{
+				System.out.println("Invalid Input");
+			}
+		}
 	}
 
 	// Traverse the BBoard's message list, and invote the print function on Topic objects ONLY
 	// It will then be the responsibility of the Topic object to invoke the print function recursively on its own replies
 	// The BBoard display function will ignore all reply objects in its message list
 	private void display(){
-
+		for(int i = 0; i < msgList.size(); i++){
+			if(msgList.get(i).isReply() == false){
+				msgList.get(i).print(0);
+			}
+		}
 	}
 
 

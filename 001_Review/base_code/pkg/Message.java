@@ -23,6 +23,7 @@ public class Message {
 		this.subj = subj;
 		this.bod = bod;
 		this.i = i;
+		this.childList = new ArrayList<Message>();
 	}
 
 	// This function is responsbile for printing the Message
@@ -35,15 +36,15 @@ public class Message {
 	// Note: Each indentation increment represents 2 spaces. e.g. if indentation ==  1, the reply should be indented 2 spaces, 
 	// if it's 2, indent by 4 spaces, etc. 
 	public void print(int indentation){
-		for(int i = 0; i <= indentation*2; i+=2){
-			System.out.print(" \n ");
-			indentation++;
+		for (int j = 0; j < indentation*2; j++) {
+			System.out.print("  ");
 		}
-		System.out.println("Message #" + indentation + ": \"" + childList.get(indentation).bod + "\"");
-		for(int i = 0; i <= indentation*2; i+=2){
-			System.out.print(" \n ");
-			indentation++;
+		System.out.println("Message #" + i + ": \"" + subj + "\"");
+		for (int j = 0; j < indentation*2; j++) {
+			System.out.print("  ");
 		}
+		System.out.println("From " + auth + ": \"" + bod + "\"");
+		print(indentation + 1);
 	}
 
 	// Default function for inheritance
