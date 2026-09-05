@@ -3,10 +3,10 @@ import java.util.*;
 import java.io.*;
 
 public class Reply extends Message {
-	private String auth;
-	private String subj;
-	private String bod;
-	private int i;
+	// String auth;
+	// String subj;
+	// String bod;
+	// int i;
 	// Default Constructor
 	public Reply() {
 		this.auth = "";

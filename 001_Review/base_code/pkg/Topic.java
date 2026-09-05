@@ -3,10 +3,10 @@ import java.util.*;
 import java.io.*;
 
 public class Topic extends Message {
-	private String auth;
-	private String subj;
-	private String bod;
-	private int i;
+	// private String auth;
+	// private String subj;
+	// private String bod;
+	// private int i;
 	// Default Constructor
 	public Topic() {
 		this.auth = "";

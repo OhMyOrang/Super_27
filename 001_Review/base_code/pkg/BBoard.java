@@ -38,6 +38,7 @@ public class BBoard {		// This is your main file that connects all classes.
 			String [] dataParts = line.split(" ");
 			usrList.add(new User(dataParts[0], dataParts[1]));
 		}
+		sc.close();
 	}
 
 	// Asks for and validates a user/password. 
@@ -53,6 +54,7 @@ public class BBoard {		// This is your main file that connects all classes.
 			String logUse = sc.nextLine();
 			if(logUse.equals("q") || logUse.equals("Q")){
 				System.out.println("qouierjntwirewgoodbye");
+				sc.close();
 				return;
 			}
 			System.out.print("\nEnter password: ");
@@ -71,6 +73,7 @@ public class BBoard {		// This is your main file that connects all classes.
 				System.out.println("Welcome back " + currentUser.getUsername() + "!!!!11!!wefwefuihwefyuiherdgrrtyshj");
 				break;
 			}
+		sc.close();
 		}
 	}
 
@@ -89,6 +92,7 @@ public class BBoard {		// This is your main file that connects all classes.
 		login();
 		Scanner sc = new Scanner(System.in);
 		if(currentUser == null){
+			sc.close();
 			return;
 		}
 		while(true){
@@ -104,16 +108,18 @@ public class BBoard {		// This is your main file that connects all classes.
 				addReply();
 			}
 			else if(chosen.equals("p") || chosen.equals("P")){
-				currentUser.setPassword();
+				setPassword();
 			}
 			else if(chosen.equals("q") || chosen.equals("Q")){
 				currentUser = null;
 				System.out.print("GET OUTTT");
+				sc.close();
 				return;
 			}
 			else{
 				System.out.println("Invalid Input");
 			}
+		sc.close();
 		}
 	}
 
@@ -154,6 +160,7 @@ public class BBoard {		// This is your main file that connects all classes.
 		String bod = sc.nextLine();
 		Message addedTopic = new Topic(currentUser.getUsername(), subj, bod, msgList.size() + 1);
 		msgList.add(addedTopic);
+		sc.close();
 	}
 
 	// This function asks the user to enter a reply to a given Message (which may be either a Topic or a Reply, so we can handle nested replies).
@@ -190,6 +197,7 @@ public class BBoard {		// This is your main file that connects all classes.
 		System.out.print("Message ID (-1 for Menu): ");
 		int id = sc.nextInt();
 		if(id == -1){
+			sc.close();
 			return;
 		}
 		while(id > msgList.size() || id != -1){
@@ -197,6 +205,7 @@ public class BBoard {		// This is your main file that connects all classes.
 			System.out.print("Message ID (-1 for Menu): ");
 			id = sc.nextInt();
 			if(id == -1){
+				sc.close();
 				return;
 			}
 		}
@@ -206,6 +215,7 @@ public class BBoard {		// This is your main file that connects all classes.
 		Message addedReply = new Reply(currentUser.getUsername(), subj, bod, msgList.size() + 1);
 		msgList.get(id - 1).addChild(addedReply);
 		msgList.add(addedReply);
+		sc.close();
 	}
 
 	// This function allows the user to change their current password.
@@ -220,6 +230,7 @@ public class BBoard {		// This is your main file that connects all classes.
 		System.out.print("Old Pass (c for Menu): ");
 		String oldPass = sc.nextLine();
 		if(oldPass.equals("c") || oldPass.equals("C")){
+			sc.close();
 			return;
 		}
 		while(!currentUser.check(usr, oldPass)){
@@ -227,6 +238,7 @@ public class BBoard {		// This is your main file that connects all classes.
 			System.out.print("Old Pass (c for Menu): ");
 			oldPass = sc.nextLine();
 			if(oldPass.equals("c") || oldPass.equals("C")){
+				sc.close();
 				return;
 			}
 		}
@@ -234,6 +246,7 @@ public class BBoard {		// This is your main file that connects all classes.
 		String newPass = sc.nextLine();
 		currentUser.setPassword(oldPass, newPass);
 		System.out.println("Yippe new pass");
+		sc.close();
 	}
 
 }

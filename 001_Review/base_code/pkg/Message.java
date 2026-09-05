@@ -3,10 +3,10 @@ import java.util.*;
 import java.io.*;
 
 public class Message {
-	private String auth;
-	private String subj;
-	private String bod;
-	private int i;
+	String auth;
+	String subj;
+	String bod;
+	int i;
 	private ArrayList<Message> childList;
 	// Default Constructor
 	public Message() {
