@@ -14,11 +14,12 @@ class main {
 		System.out.println("");
 		for(int i : times){
 			System.out.println("Interval: " + i);
-			s.start();	
+			// s.start();	
 			nums = new int[i];
 			randomize(nums);
+			s.start();
 			//  Put your method between these two comments
-			
+			selection(nums);
 			//
 			s.stop();
 			System.out.println("Duration: " + Stopwatch.readable(s.read()));
