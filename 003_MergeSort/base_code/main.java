@@ -22,6 +22,7 @@ class main {
 			System.out.println("Interval: " + i);
 			
 			nums = new int[i];
+			randomize(nums);
 			start = System.nanoTime();
 
 			//  Put your method between these two comments
@@ -34,5 +35,13 @@ class main {
 			System.out.println("Duration: " + (finish-start));
 			System.out.println("");
 		}
+	}
+	public static void randomize(int arr[]){
+		for(int i = 0; i < arr.length; i++){
+			arr[i] = (int)(Math.random()*101);
+		}
+	}
+	public static void mergeSort(){
+
 	}
 }
