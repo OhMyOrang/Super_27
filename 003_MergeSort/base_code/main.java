@@ -32,8 +32,13 @@ class main {
 			finish = System.nanoTime();
 			System.out.println("Started: " + start);
 			System.out.println("Finished: " + finish);
-			System.out.println("Duration: " + (finish-start));
+			System.out.println("Duration (seconds): " + ((finish-start)/1000000000.0));
 			System.out.println("");
+		}
+	}
+	public static void randomize(int arr[]){
+		for(int i = 0; i < arr.length; i++){
+			arr[i] = (int)(Math.random()*101);
 		}
 	}
 	public static void mergeSort(int[] a) {

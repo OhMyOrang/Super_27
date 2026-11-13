@@ -22,41 +22,51 @@ class main {
 			System.out.println("Interval: " + i);
 			
 			nums = new int[i];
-			// randomize(nums);
+			randomize(nums);
 			start = System.nanoTime();
 
 			//  Put your method between these two comments
-
+			quickSort(nums);
 			//
 
 			finish = System.nanoTime();
 			System.out.println("Started: " + start);
 			System.out.println("Finished: " + finish);
-			System.out.println("Duration: " + (finish-start));
+			System.out.println("Duration: " + ((finish-start)/1000000000.0));
 			System.out.println("");
 		}
 	}
-	public static void quickSort(int arr[], int low, int high){
-		if(low < high){
-			int pi = partition(arr, low, high);
-			quickSort(arr, low, pi -1 );
-			quickSort(arr, pi + 1, high);
+	public static void randomize(int arr[]){
+		for(int i = 0; i < arr.length; i++){
+			arr[i] = (int)(Math.random()*101);
 		}
 	}
-	public static int partition(int arr[], int low, int high){
-		int pivot = arr[high];
-		int i = low - 1;
-		for(int j = low; j <= high - 1; j++){
-			if(arr[j] < pivot){
-				i++
-				int temp = arr[j];
-				arr[j] = arr[i];
-				arr[i] = temp;
-			}
-		}
-		int temp = arr[i+1];
-		arr[i+1] = arr[high];
-		arr[high] = temp;
-		return i + 1;
+	public static void quickSort(int[] a) {
+    	quickSort(a, 0, a.length - 1);
+	}
+	private static void quickSort(int[] a, int lo, int hi) {
+    	if (lo >= hi) {
+    	    return;                         // 0 or 1 elements
+    	}
+    	int p = partition(a, lo, hi);
+    	quickSort(a, lo, p - 1);
+    	quickSort(a, p + 1, hi);
+	}
+	private static int partition(int[] a, int lo, int hi) {
+    	int pivot = a[hi];
+    	int i = lo;
+    	for (int j = lo; j < hi; j++) {
+        	if (a[j] < pivot) {
+            	// a small element joins the small part
+            	swap(a, i, j);
+            	i++;
+        	}
+    	}
+    	// the pivot goes just after the small part
+    	swap(a, i, hi);
+    	return i;
+	}
+	private static void swap(int[] a, int x, int y) {
+    int t = a[x]; a[x] = a[y]; a[y] = t;
 	}
 }
