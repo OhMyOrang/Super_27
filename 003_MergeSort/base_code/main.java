@@ -26,7 +26,7 @@ class main {
 			start = System.nanoTime();
 
 			//  Put your method between these two comments
-
+			mergeSort(nums);
 			//
 
 			finish = System.nanoTime();
@@ -36,12 +36,47 @@ class main {
 			System.out.println("");
 		}
 	}
-	public static void randomize(int arr[]){
-		for(int i = 0; i < arr.length; i++){
-			arr[i] = (int)(Math.random()*101);
-		}
+	public static void mergeSort(int[] a) {
+	    if (a.length < 2) {
+	        return;             // already sorted
+	    }
+    	int mid = a.length / 2;
+    	// a[0] to a[mid - 1]
+    	int[] left = Arrays.copyOfRange(a, 0, mid);
+    	int[] right = Arrays.copyOfRange(a, mid, a.length);
+    	mergeSort(left);
+    	mergeSort(right);
+    	merge(left, right, a);  // write the result back into a
 	}
-	public static void mergeSort(){
-
-	}
+	private static void merge(int[] left, int[] right, int[] out) {
+    	int i = 0, j = 0, k = 0;
+    	while (i < left.length && j < right.length) {
+    	    if (left[i] <= right[j]) {
+    	        out[k] = left[i];
+    	        i++;
+    	    } else {
+    	        out[k] = right[j];
+   	        	j++;
+        	}
+        k++;
+    	}
+    	// the rest of left
+    	while (i < left.length) { out[k] = left[i]; i++; k++; }
+    	// the rest of right
+    	while (j < right.length) { out[k] = right[j]; j++; k++; }
+    }
+	// Scanner sc = new Scanner(newFile("births.csv"));
+    //     DayBirth = new ArrayList<String>();
+    //     while(sc.hasNextLine()){
+    //         String line = sc.nextLine();
+    //         DayBirths.add(line);
+    //     }
+    //     sc.close();
+	// public int[] getArr(){
+    //     int[] arr = new int[DayBirth.size()];
+    //     for(int i = 0; i < DayBirth.size(); i++){
+    //         arr[i] = DayBirth.get(i);
+    //     }
+    //     return arr;
+    // }
 }
