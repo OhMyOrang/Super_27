@@ -23,5 +23,8 @@ public class DayBirth {
         ge=g;
         births=b;
     }
+    public int getBirths(){
+        return births;
+    }
 
 }
