@@ -21,7 +21,6 @@ class main {
 			list.insert(i, list.get(39-i));
 			list.remove(39-i+1);
 			list.insert(39-i, temp);
-			list.remove(i+1);
 		}
 		list.printList();
 	}
